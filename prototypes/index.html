@@ -514,11 +514,60 @@
       </div>
     </div>
   </div>
+
+  <div class="browser">
+    <div class="bar"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="url">admin.qiyeshiming.com / holdnote / overdue</div></div>
+    <div class="ws">
+      <div class="side">
+        <div class="logo"><span class="m">钢</span>实名签收后台</div>
+        <div class="nav">
+          <a>▤ 数据概览</a>
+          <a>🏢 客户与开户</a>
+          <a class="on">📦 留货单·逾期处理</a>
+          <a>📄 提货单</a>
+          <a>🧾 结算与异议</a>
+          <a>🔒 证据中心</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="h"><h3>留货单逾期处理 · LH-260525-066</h3><span class="badge b-warn">已逾期 1 天</span></div>
+        <div class="stat-row">
+          <div class="scan-box" style="flex:1">
+            <div style="font-weight:700;margin-bottom:2px">江苏沪宁钢铁有限公司</div>
+            <div style="font-size:13px;color:var(--muted);margin-bottom:12px">螺纹钢 HRB400E Φ20 · 经办人 李伟</div>
+            <div class="row"><span class="k">锁定数量 / 已提</span><span class="v">300t / 180t（余 120t）</span></div>
+            <div class="row"><span class="k">锁定单价</span><span class="v" style="color:var(--accent)">¥ 3,860 / 吨</span></div>
+            <div class="row"><span class="k">当前市场价</span><span class="v" style="color:var(--danger)">¥ 4,010 / 吨 ↑</span></div>
+            <div class="row"><span class="k">定金</span><span class="v">¥ 115,800</span></div>
+            <div class="row"><span class="k">提货有效期</span><span class="v" style="color:var(--danger)">已于 05-25 18:00 届满</span></div>
+          </div>
+          <div class="scan-box" style="flex:1">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:12px">选择处理方式（依协议逾期条款）</div>
+            <div class="match warn" style="cursor:pointer">A · 顺延并按市场价调价至 ¥4,010/吨 → 待买方确认</div>
+            <div class="match warn" style="cursor:pointer;margin-top:8px">B · 抵扣定金 ¥115,800 作违约金并解除剩余</div>
+            <div class="match ok" style="cursor:pointer;margin-top:8px">C · 解除留货 · 释放库存 120t</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--muted)">
+              <span class="check" style="background:var(--brand)">✓</span> 通知经办人（系统推送 + 短信，记录送达证据）
+            </div>
+            <button class="btn" style="margin-top:12px">执行处理并通知 · 存证</button>
+          </div>
+        </div>
+        <table>
+          <tr><th>时间</th><th>动作</th><th>送达</th><th>结果</th></tr>
+          <tr><td>05-24 18:00</td><td>到期前 T-1 提醒经办人</td><td><span class="badge b-success">已送达</span></td><td>—</td></tr>
+          <tr><td>05-25 18:00</td><td>有效期届满 · 余 120t 未提</td><td>—</td><td><span class="badge b-warn">逾期待处理</span></td></tr>
+          <tr><td>05-26 09:30</td><td>卖方发起处理（待确认）</td><td><span class="badge b-info">待操作</span></td><td><span class="badge b-muted">进行中</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="legend">
   <b>设计说明：</b> 配色采用钢贸工业蓝（品牌色 #1456d6），状态用语义色区分（蓝=进行/待确认，绿=完成/已存证，橙=待出库/提醒）。
   移动端核心操作 ≤ 2 步；提货码绑定车牌+数量+时段并动态刷新防转借；仓管端实时车牌比对与地磅同步；后台一键聚合证据链并出证。
+  留货单逾期处理支持调价/定金抵扣/解除三分支，所有通知均记录送达证据并存证，形成锁价闭环。
 </div>
 
 <div class="foot-note">钢贸提货单实名签收系统 · 高保真原型（静态演示，数据为示例）</div>
