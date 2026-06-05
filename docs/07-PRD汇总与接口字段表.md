@@ -22,6 +22,7 @@
 | 角色 | 核心用例 |
 |---|---|
 | 业务员 | 开户、签服务协议、代录企业档案、生成留货单/结算单、出证 |
+| 企业管理员 | 法人授权；自助增/减/停用经办人、分配授权范围（二级授权） |
 | 经办人 | 个人实名、确认留货单、发起提货指令、查看回执、核对结算/提异议 |
 | 驾驶员 | 凭提货码到仓提货 |
 | 仓管 | 核验提货码+车牌、过磅、出库放行 |
@@ -104,6 +105,19 @@
 | agreementSignEvidenceId | S | 服务协议签署存证ID |
 | timestamp | T | 可信时间戳 |
 | chainTx | S | 上链交易号 |
+
+### 5.1.2 企业管理员管理经办人 `POST /enterprise/{id}/operators`
+> 二级授权：法人授权的企业管理员自助增/减/停用经办人，变更实时留痕。
+**入参**
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| adminId | S | 是 | 企业管理员ID（法人已授权） |
+| action | E | 是 | `add`新增 / `disable`停用 / `update_scope`调整授权 |
+| operator | O | 是 | 经办人信息（姓名/身份证/手机/授权范围） |
+| willAuth | E | 是 | 管理员意愿认证 `sms`/`face` |
+| authCode | S | 是 | 验证码/人脸令牌 |
+
+**出参**：`operatorId:S`、`operatorStatus:E`(`待实名`/`已停用`)、`changeEvidenceId:S`、`timestamp:T`
 
 ### 5.2 留货单确认 `POST /holdnote/{id}/confirm`
 **入参**
