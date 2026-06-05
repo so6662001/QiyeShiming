@@ -522,6 +522,7 @@
             <div class="match ok">✓ 车牌识别比对一致</div>
             <div style="text-align:center;margin:14px 0"><span class="plate">浙A·F2X87</span></div>
             <div class="match warn">⚠ 授权 ≤120 吨，请按实际过磅出库</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4">车牌不一致时自动拦截 → 推送经办人二次确认（短信/刷脸）并存证后方可放行</div>
           </div>
           <div class="scan-box">
             <div style="font-size:13px;color:var(--muted);margin-bottom:6px">企业 / 货物</div>
@@ -633,6 +634,7 @@
   <b>设计说明：</b> 配色采用钢贸工业蓝（品牌色 #1456d6），状态用语义色区分（蓝=进行/待确认，绿=完成/已存证，橙=待出库/提醒）。
   移动端核心操作 ≤ 2 步；提货码绑定车牌+数量+时段并动态刷新防转借；仓管端实时车牌比对与地磅同步；后台一键聚合证据链并出证。
   留货单逾期处理支持调价/定金抵扣/解除三分支，所有通知均记录送达证据并存证，形成锁价闭环。
+  车牌属授权范围：现场车牌与提货码不一致即拦截，须经办人二次确认（短信/刷脸）更新绑定并存证后放行，防止越权放货与冒领。
 </div>
 
 <div class="foot-note">钢贸提货单实名签收系统 · 高保真原型（静态演示，数据为示例）</div>

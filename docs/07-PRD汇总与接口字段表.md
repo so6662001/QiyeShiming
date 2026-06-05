@@ -130,6 +130,26 @@
 | signEvidenceId | S | 指令签署存证ID |
 | timestamp | T | 可信时间戳 |
 
+### 5.3.1 提货码车牌变更二次确认 `POST /pickup/order/{id}/change-plate`
+> 车牌属授权范围，变更须经办人重新确认并存证后方可放行（见 `03` 文档 3.3.1）。
+**入参**
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| operatorId | S | 是 | 经办人ID |
+| newPlateNo | S | 是 | 变更后车牌 |
+| reason | S | 否 | 变更原因（换车/换车头/故障等） |
+| willAuth | E | 是 | `sms`/`face`（大额建议 face） |
+| authCode | S | 是 | 验证码/人脸令牌 |
+
+**出参**
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| status | E | `re_authorized` 重新授权成功 |
+| oldPlateNo | S | 原车牌 |
+| newPlateNo | S | 新车牌 |
+| changeEvidenceId | S | 变更存证ID（原/新车牌、时间、重新确认记录） |
+| timestamp | T | 可信时间戳 |
+
 ### 5.4 仓库核验提货码 `POST /warehouse/verify-code`
 **入参**
 | 字段 | 类型 | 必填 | 说明 |
