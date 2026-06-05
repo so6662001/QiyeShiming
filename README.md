@@ -15,5 +15,6 @@
 - [05-技术架构与存证证据链](./docs/05-技术架构与存证证据链.md)
 - [06-成本测算与服务商选型](./docs/06-成本测算与服务商选型.md)
 - [07-PRD汇总与接口字段表](./docs/07-PRD汇总与接口字段表.md)
+- [08-在线提货与签收服务协议(完整版)](./docs/08-在线提货与签收服务协议(完整版).md)
 - 高保真 UI 原型：[`prototypes/index.html`](./prototypes/index.html)
 - 一页纸（给老板/客户）：[`prototypes/onepager.html`](./prototypes/onepager.html)
