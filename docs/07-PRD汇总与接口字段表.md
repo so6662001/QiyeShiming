@@ -219,6 +219,20 @@
 | deliveryConfirmed | B | 出库即确认=true |
 | evidenceId | S | 出库证据存证ID |
 
+### 5.6.1 付款入账与主体校验 `POST /settlement/{id}/payment`
+> 防主体错位：付款账户名与合同买方不一致时拦截，须补代付确认或主体变更方可核销。
+**入参**：`payerName:S`付款方名称、`payerAccount:S`、`amount:N`、`payVoucherUrl:S`
+**出参**
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| subjectMatch | B | 付款方是否与合同买方一致 |
+| status | E | `posted`已入账 / `held_subject_mismatch`主体不一致挂起 |
+| requiredAction | E | `none` / `proxy_pay_confirm`需代付确认书 / `subject_change`需主体变更三方确认 |
+
+### 5.6.2 第三方代付确认 `POST /settlement/{id}/proxy-pay-confirm`
+**入参**：`buyerId:S`合同买方、`payerName:S`代付方、`relation:E`(`affiliate`/`entrust`/`other`)、`buyerSign:O`、`payerSign:O`、`background:S`真实交易背景
+**出参**：`status:E`(`confirmed`)、`evidenceId:S`、`timestamp:T`
+
 ### 5.7 结算单送达 `POST /settlement/deliver`
 **入参**：`settlementId:S`、`channels:A`(`["app","sms","email"]`)、`objectionDays:I`
 **出参**
