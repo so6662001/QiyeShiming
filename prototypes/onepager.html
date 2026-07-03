@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>提货单实名签收 · 为什么既简单又合法（一页纸）</title>
+<style>
+  :root{
+    --brand:#1456d6; --brand-d:#0b3aa0; --brand-l:#e8efff;
+    --accent:#ff7a1a; --ink:#13203a; --muted:#5e6b80; --line:#e4e9f2;
+    --green:#10a36b; --green-l:#e4f7ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#eef1f6;color:var(--ink);padding:30px 16px;line-height:1.55}
+  .sheet{max-width:920px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 48px rgba(20,40,80,.14)}
+  .hd{background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;padding:34px 40px}
+  .hd .kicker{font-size:13px;opacity:.85;letter-spacing:3px}
+  .hd h1{font-size:30px;margin-top:8px;letter-spacing:.5px}
+  .hd p{margin-top:10px;opacity:.92;font-size:15px}
+  .bd{padding:34px 40px}
+
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:30px}
+  .prop{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fafcff}
+  .prop .ic{width:46px;height:46px;border-radius:12px;background:var(--brand-l);color:var(--brand);display:grid;place-items:center;font-size:24px;font-weight:800;margin-bottom:12px}
+  .prop h3{font-size:17px;margin-bottom:6px}
+  .prop p{font-size:13px;color:var(--muted)}
+
+  h2.sec{font-size:18px;margin:8px 0 16px;display:flex;align-items:center;gap:10px}
+  h2.sec::before{content:"";width:5px;height:20px;background:var(--accent);border-radius:3px}
+
+  .steps{display:flex;align-items:stretch;gap:0;margin-bottom:30px}
+  .step{flex:1;text-align:center;position:relative;padding:0 6px}
+  .step .n{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;margin:0 auto 10px}
+  .step .t{font-size:14px;font-weight:700}
+  .step .d{font-size:12px;color:var(--muted);margin-top:3px}
+  .step:not(:last-child)::after{content:"›";position:absolute;right:-6px;top:8px;color:#c4cdda;font-size:24px}
+
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
+  .pillar{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+  .pillar .chk{width:24px;height:24px;border-radius:50%;background:var(--green-l);color:var(--green);display:grid;place-items:center;font-weight:800;flex:0 0 auto}
+  .pillar b{font-size:14px}
+  .pillar p{font-size:12.5px;color:var(--muted);margin-top:3px}
+
+  .flow{background:#f5f8fe;border:1px dashed var(--brand);border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-bottom:26px}
+  .flow .node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600}
+  .flow .node.key{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .flow .arr{color:#9fb0d6;font-weight:800}
+
+  .cost{display:flex;gap:16px;align-items:center;background:var(--green-l);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+  .cost .big{font-size:34px;font-weight:800;color:var(--green)}
+  .cost .txt{font-size:13px;color:#2c6a4f}
+
+  .ft{padding:18px 40px;background:#f7f9fc;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);text-align:center}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .sheet{box-shadow:none;border-radius:0;max-width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="hd">
+    <div class="kicker">钢 贸 提 货 数 字 化</div>
+    <h1>在线实名提货签收 · 为什么既简单又合法</h1>
+    <p>客户少跑腿、提货更快，单据有法律效力、纠纷能出证，成本还更低。</p>
+  </div>
+
+  <div class="bd">
+    <div class="props">
+      <div class="prop">
+        <div class="ic">易</div>
+        <h3>对客户·简单</h3>
+        <p>不签繁琐合同、不做企业实名。采购员刷脸认证一次，以后手机几步就能提货。</p>
+      </div>
+      <div class="prop">
+        <div class="ic">法</div>
+        <h3>对纠纷·合法</h3>
+        <p>电子签名 + 时间戳 + 区块链存证，等同盖章签字，打官司能一键出具存证报告。</p>
+      </div>
+      <div class="prop">
+        <div class="ic">省</div>
+        <h3>对老板·省钱</h3>
+        <p>实名一次性成本 ≤ 0.5 元/人，提货全程线上，省人工、防冒领、锁价防赖账。</p>
+      </div>
+    </div>
+
+    <h2 class="sec">客户提货，只需这几步</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div class="t">刷脸实名</div><div class="d">采购员一次性</div></div>
+      <div class="step"><div class="n">2</div><div class="t">确认留货单</div><div class="d">锁价锁量</div></div>
+      <div class="step"><div class="n">3</div><div class="t">生成提货码</div><div class="d">绑定车牌/数量</div></div>
+      <div class="step"><div class="n">4</div><div class="t">司机凭码提货</div><div class="d">出库即确认</div></div>
+    </div>
+
+    <h2 class="sec">为什么它在法律上站得住</h2>
+    <div class="pillars">
+      <div class="pillar"><span class="chk">✓</span><div><b>可靠电子签名</b><p>持牌 CA 数字证书 + 个人实名，等同手写签名/盖章（《电子签名法》）。</p></div></div>
+      <div class="pillar"><span class="chk">✓</span><div><b>出库即交付</b><p>货物驶离仓库即交付完成、风险转移（《民法典》第604条 + 协议约定）。</p></div></div>
+      <div class="pillar"><span class="chk">✓</span><div><b>司机提货可绑定企业</b><p>实名采购员下发提货码 = 对本次提货的明确授权，第三方司机也算数。</p></div></div>
+      <div class="pillar"><span class="chk">✓</span><div><b>结算沉默即认可</b><p>结算单送达后约定期内无异议视为认可（《民法典》第621条 + 异议期）。</p></div></div>
+    </div>
+
+    <h2 class="sec">一笔提货的完整闭环（全程留痕存证）</h2>
+    <div class="flow">
+      <span class="node">开户签服务协议</span><span class="arr">→</span>
+      <span class="node">采购员刷脸实名</span><span class="arr">→</span>
+      <span class="node">确认留货单·锁价</span><span class="arr">→</span>
+      <span class="node key">提货码授权</span><span class="arr">→</span>
+      <span class="node">仓库核验+过磅</span><span class="arr">→</span>
+      <span class="node key">出库即确认</span><span class="arr">→</span>
+      <span class="node">结算单·异议期</span><span class="arr">→</span>
+      <span class="node">确认+可出证</span>
+    </div>
+
+    <h2 class="sec">成本一眼看清</h2>
+    <div class="cost">
+      <div class="big">≤ ¥0.5</div>
+      <div class="txt"><b>每人实名认证一次性成本</b><br/>实名只做一次、永久复用；日常签署用短信验证码仅几分钱，大额才刷脸。</div>
+    </div>
+  </div>
+
+  <div class="ft">
+    钢贸提货单实名签收系统 · 决策参考一页纸 ｜ 法律文本以法务定稿为准，成本以服务商实际报价为准 ｜ 可直接打印（A4）
+  </div>
+</div>
+</body>
+</html>

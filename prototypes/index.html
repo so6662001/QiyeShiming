@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>钢贸提货单实名签收系统 · 高保真 UI 原型</title>
+<style>
+  :root{
+    --brand:#1456d6; --brand-d:#0b3aa0; --brand-l:#e8efff;
+    --accent:#ff7a1a;
+    --bg:#eaeef4; --surface:#ffffff; --surface-2:#f6f8fb;
+    --text:#161d2b; --muted:#6b7686; --line:#e6eaf1;
+    --success:#10a36b; --success-l:#e4f7ee;
+    --warning:#e89a16; --warning-l:#fdf2dd;
+    --danger:#e5484d; --danger-l:#fdeaea;
+    --info:#3b82f6; --info-l:#e7f0ff;
+    --radius:16px; --shadow:0 10px 30px rgba(20,40,80,.10);
+    --shadow-sm:0 2px 8px rgba(20,40,80,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#dfe5ef 0%, #eaeef4 100%);
+    color:var(--text); line-height:1.5; padding:40px 20px 80px;
+  }
+  .page-head{max-width:1180px;margin:0 auto 36px;text-align:center}
+  .page-head h1{font-size:30px;letter-spacing:.5px}
+  .page-head p{color:var(--muted);margin-top:10px;font-size:15px}
+  .badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .pill{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--brand);box-shadow:var(--shadow-sm);font-weight:600}
+
+  .section-title{max-width:1180px;margin:54px auto 22px;display:flex;align-items:center;gap:12px}
+  .section-title .num{width:34px;height:34px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;box-shadow:var(--shadow-sm)}
+  .section-title h2{font-size:20px}
+  .section-title span{color:var(--muted);font-size:13px;margin-left:6px;font-weight:400}
+
+  .gallery{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:34px;justify-content:center}
+
+  /* ---------- phone ---------- */
+  .phone{
+    width:330px;background:#0c1322;border-radius:44px;padding:12px;
+    box-shadow:var(--shadow);position:relative;flex:0 0 auto;
+  }
+  .phone .screen{background:var(--surface-2);border-radius:34px;overflow:hidden;height:680px;display:flex;flex-direction:column;position:relative}
+  .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0c1322;border-radius:0 0 18px 18px;z-index:30}
+  .statusbar{height:42px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 22px 6px;font-size:12px;font-weight:600;color:var(--text);background:transparent;z-index:5}
+  .statusbar .right{display:flex;gap:6px;align-items:center}
+  .caption{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);font-weight:600}
+
+  .appbar{background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;padding:8px 18px 16px;display:flex;align-items:center;gap:10px}
+  .appbar .back{font-size:20px;opacity:.9}
+  .appbar h3{font-size:17px;font-weight:600;flex:1}
+  .appbar .more{opacity:.85;font-size:18px}
+
+  .body{flex:1;overflow:auto;padding:16px}
+  .body.flush{padding:0}
+
+  .card{background:var(--surface);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-sm);border:1px solid var(--line);margin-bottom:14px}
+  .card h4{font-size:14px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--brand)}
+
+  .row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .row:last-child{border-bottom:none}
+  .row .k{color:var(--muted)}
+  .row .v{font-weight:600;text-align:right}
+
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}
+  .input{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:14px;color:var(--text);display:flex;justify-content:space-between;align-items:center}
+  .input .ph{color:#b6bdc9}
+  .input.sel::after{content:"›";color:#b6bdc9;font-size:18px;transform:rotate(90deg)}
+
+  .btn{display:block;width:100%;text-align:center;background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:600;box-shadow:0 8px 18px rgba(20,86,214,.32);cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand);box-shadow:none}
+  .btn.amber{background:linear-gradient(135deg,#ff8a2a,#f06f12);box-shadow:0 8px 18px rgba(240,111,18,.3)}
+  .btn-bar{padding:14px 16px 18px;background:var(--surface);border-top:1px solid var(--line)}
+
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+  .b-info{background:var(--info-l);color:var(--info)}
+  .b-success{background:var(--success-l);color:var(--success)}
+  .b-warn{background:var(--warning-l);color:var(--warning)}
+  .b-muted{background:#eef1f5;color:var(--muted)}
+
+  .hero-ent{background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;padding:18px;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:16px}
+  .hero-ent .name{font-size:17px;font-weight:700}
+  .hero-ent .sub{opacity:.85;font-size:12px;margin-top:4px}
+  .hero-ent .chips{margin-top:14px;display:flex;gap:8px}
+  .hero-ent .chip{background:rgba(255,255,255,.18);border-radius:8px;padding:6px 10px;font-size:12px}
+
+  .quick{display:flex;gap:12px;margin-bottom:16px}
+  .quick .q{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;box-shadow:var(--shadow-sm)}
+  .quick .q .ic{width:40px;height:40px;border-radius:12px;background:var(--brand-l);color:var(--brand);display:grid;place-items:center;margin:0 auto 8px;font-size:20px}
+  .quick .q .t{font-size:12px;font-weight:600}
+
+  .order{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .order .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .order .no{font-size:13px;color:var(--muted)}
+  .order .goods{font-size:15px;font-weight:700;margin-bottom:4px}
+  .order .meta{font-size:12px;color:var(--muted)}
+  .order .foot{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+
+  /* id upload */
+  .id-up{display:flex;gap:12px;margin-bottom:16px}
+  .id-card{flex:1;height:104px;border:1.6px dashed #c4cdda;border-radius:14px;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:12px}
+  .id-card .ic{font-size:26px;color:var(--brand)}
+  .id-card.done{border-style:solid;border-color:var(--success);background:var(--success-l);color:var(--success)}
+
+  .consent{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--muted);margin:6px 2px 16px}
+  .check{width:18px;height:18px;border-radius:6px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:11px;flex:0 0 auto}
+  .consent b{color:var(--brand)}
+
+  /* sms code */
+  .code-in{display:flex;gap:10px;justify-content:center;margin:8px 0 4px}
+  .code-in .d{width:42px;height:52px;border:1.5px solid var(--line);border-radius:12px;display:grid;place-items:center;font-size:22px;font-weight:700;background:var(--surface)}
+  .code-in .d.on{border-color:var(--brand);color:var(--brand)}
+  .code-in .d.cur{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-l)}
+
+  /* qr */
+  .qr-wrap{text-align:center;padding:8px 0 4px}
+  .qr{width:184px;height:184px;margin:0 auto;border-radius:16px;background:#fff;border:1px solid var(--line);padding:14px;box-shadow:var(--shadow-sm)}
+  .qr svg{width:100%;height:100%}
+  .pcode{font-size:30px;font-weight:800;letter-spacing:6px;color:var(--text);margin-top:14px}
+  .pcode-lbl{font-size:12px;color:var(--muted);margin-top:2px}
+
+  /* timeline */
+  .tl{position:relative;padding-left:8px}
+  .tl .it{position:relative;padding:0 0 22px 28px;border-left:2px solid var(--line)}
+  .tl .it:last-child{border-left-color:transparent;padding-bottom:0}
+  .tl .it::before{content:"";position:absolute;left:-9px;top:0;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--line)}
+  .tl .it.done::before{background:var(--success);border-color:var(--success)}
+  .tl .it.cur::before{background:var(--brand);border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-l)}
+  .tl .it .t{font-size:14px;font-weight:700}
+  .tl .it .d{font-size:12px;color:var(--muted);margin-top:3px}
+
+  /* ---------- desktop ---------- */
+  .browser{width:100%;max-width:1080px;background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .browser .bar{background:#f1f3f7;border-bottom:1px solid var(--line);padding:11px 16px;display:flex;align-items:center;gap:8px}
+  .browser .bar .dots{display:flex;gap:6px}
+  .browser .bar .dots i{width:12px;height:12px;border-radius:50%;display:block}
+  .browser .url{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);margin-left:10px}
+  .ws{display:flex;min-height:560px}
+  .side{width:210px;background:#0f1b30;color:#cdd6e6;padding:18px 12px;flex:0 0 auto}
+  .side .logo{color:#fff;font-weight:800;font-size:15px;padding:6px 10px 18px;display:flex;align-items:center;gap:9px}
+  .side .logo .m{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#4f8bff);display:grid;place-items:center;font-size:14px}
+  .side .nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;font-size:13px;color:#aeb9cc;margin-bottom:3px}
+  .side .nav a.on{background:rgba(80,139,255,.16);color:#fff;font-weight:600}
+  .main{flex:1;background:var(--surface-2);padding:22px;overflow:auto}
+  .main .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .main .h h3{font-size:18px}
+  .stat-row{display:flex;gap:14px;margin-bottom:18px}
+  .stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow-sm)}
+  .stat .n{font-size:24px;font-weight:800}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:4px}
+  .stat .n.g{color:var(--success)} .stat .n.b{color:var(--brand)} .stat .n.w{color:var(--warning)}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  th,td{text-align:left;padding:12px 14px;font-size:13px;border-bottom:1px solid var(--line)}
+  th{background:#f3f6fa;color:var(--muted);font-weight:600}
+  tr:last-child td{border-bottom:none}
+
+  /* verify workbench */
+  .verify-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .scan-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow-sm)}
+  .scan-in{display:flex;gap:10px;margin-bottom:18px}
+  .scan-in input{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:13px;font-size:18px;letter-spacing:3px;font-weight:700}
+  .scan-in button{background:var(--brand);color:#fff;border:none;border-radius:10px;padding:0 20px;font-weight:600;cursor:pointer}
+  .match{display:flex;align-items:center;gap:10px;padding:13px;border-radius:10px;margin-bottom:10px;font-size:13px}
+  .match.ok{background:var(--success-l);color:var(--success)}
+  .match.warn{background:var(--warning-l);color:var(--warning)}
+  .plate{background:#0a47b0;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800;letter-spacing:2px;font-size:18px;display:inline-block}
+  .weigh{font-size:34px;font-weight:800;color:var(--brand);text-align:center;padding:10px 0}
+  .legend{max-width:1180px;margin:30px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 22px;font-size:13px;color:var(--muted);box-shadow:var(--shadow-sm)}
+  .legend b{color:var(--text)}
+
+  .foot-note{max-width:1180px;margin:50px auto 0;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>钢贸提货单实名签收系统</h1>
+  <p>高保真 UI 原型 · 经办人移动端 / 仓管核验端 / 业务员后台</p>
+  <div class="badges">
+    <span class="pill">实名一次复用</span>
+    <span class="pill">提货码授权</span>
+    <span class="pill">出库即确认</span>
+    <span class="pill">电子签名+存证</span>
+  </div>
+</div>
+
+<!-- ============ 经办人移动端 ============ -->
+<div class="section-title">
+  <div class="num">A</div>
+  <h2>经办人移动端</h2><span>采购员 / 老板 · 小程序 / H5</span>
+</div>
+
+<div class="gallery">
+
+  <!-- 1. 实名认证 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>个人实名认证</h3><span class="more">⋯</span></div>
+    <div class="body">
+      <div class="card">
+        <h4><span class="dot"></span>上传身份证（一次性）</h4>
+        <div class="id-up">
+          <div class="id-card done"><div class="ic">✓</div>人像面 已上传</div>
+          <div class="id-card"><div class="ic">＋</div>国徽面</div>
+        </div>
+        <div class="row"><span class="k">姓名</span><span class="v">张建国</span></div>
+        <div class="row"><span class="k">身份证号</span><span class="v">3301**********0017</span></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>核验方式</h4>
+        <div class="row"><span class="k">运营商三要素</span><span class="badge b-success">✓ 通过</span></div>
+        <div class="row"><span class="k">人脸活体核身</span><span class="badge b-info">待采集</span></div>
+      </div>
+      <div class="consent"><span class="check">✓</span>
+        <div>我已阅读并<b>单独同意</b>《隐私政策》，同意处理我的人脸等敏感信息并为我签发数字证书。</div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn">人脸核身并完成认证</button></div>
+  </div></div>
+  <div class="caption">A1 · 个人实名认证</div>
+  </div>
+
+  <!-- 2. 首页 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><h3 style="flex:1">提货工作台</h3><span class="more">⌂</span></div>
+    <div class="body">
+      <div class="hero-ent">
+        <div class="name">浙江中钢物资有限公司</div>
+        <div class="sub">经办人：张建国 · 已实名 · 授权 ≤500吨/单</div>
+        <div class="chips"><span class="chip">服务协议已签</span><span class="chip">已预授权</span></div>
+      </div>
+      <div class="quick">
+        <div class="q"><div class="ic">＋</div><div class="t">发起提货</div></div>
+        <div class="q"><div class="ic">▦</div><div class="t">提货码</div></div>
+        <div class="q"><div class="ic">≡</div><div class="t">结算单</div></div>
+      </div>
+      <div style="font-size:13px;font-weight:700;margin:6px 2px 10px">进行中的提货</div>
+      <div class="order">
+        <div class="top"><span class="no">TH-260602-018</span><span class="badge b-warn">待出库</span></div>
+        <div class="goods">热轧卷板 Q235B 3.0*1500</div>
+        <div class="meta">授权 120 吨 · 浙A·F2X87 · 今日 18:00 前有效</div>
+        <div class="foot"><span>提货码 8821 4406</span><span style="color:var(--brand);font-weight:600">查看 ›</span></div>
+      </div>
+      <div class="order">
+        <div class="top"><span class="no">TH-260601-204</span><span class="badge b-info">待确认结算</span></div>
+        <div class="goods">螺纹钢 HRB400E Φ20</div>
+        <div class="meta">实提 98.62 吨 · 异议期剩 2 天</div>
+        <div class="foot"><span>结算金额 ¥ 386,520</span><span style="color:var(--brand);font-weight:600">核对 ›</span></div>
+      </div>
+      <div class="order">
+        <div class="top"><span class="no">TH-260530-077</span><span class="badge b-success">已确认</span></div>
+        <div class="goods">冷轧卷板 SPCC 1.0*1250</div>
+        <div class="meta">实提 45.30 吨 · 已存证</div>
+      </div>
+    </div>
+  </div></div>
+  <div class="caption">A2 · 提货工作台（首页）</div>
+  </div>
+
+  <!-- 3. 留货单在线确认（锁价签署） -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>留货单确认</h3></div>
+    <div class="body">
+      <div class="card">
+        <h4><span class="dot"></span>留货单 LH-260602-031</h4>
+        <div class="row"><span class="k">品名 / 规格</span><span class="v">热轧卷板 Q235B 3.0*1500</span></div>
+        <div class="row"><span class="k">锁定数量</span><span class="v">120 吨</span></div>
+        <div class="row"><span class="k">锁定单价</span><span class="v" style="color:var(--accent)">¥ 3,920 / 吨</span></div>
+        <div class="row"><span class="k">货款总额</span><span class="v">¥ 470,400</span></div>
+        <div class="row"><span class="k">定金</span><span class="v">¥ 47,040（10%）</span></div>
+        <div class="row"><span class="k">提货有效期</span><span class="v">至 06-09 18:00</span></div>
+      </div>
+      <div class="consent" style="background:var(--warning-l);border-radius:12px;padding:12px;color:var(--text)">
+        <span class="check" style="background:var(--warning)">!</span>
+        <div style="font-size:12px"><b>锁价提示：</b>确认后单价锁定，钢价波动不影响本单；逾期未提按《在线提货与签收服务协议》逾期条款处理（可调价/定金抵扣）。</div>
+      </div>
+      <div class="consent"><span class="check">✓</span>
+        <div>我已阅读并确认本留货单货物、价款，<b>适用《在线提货与签收服务协议》</b>，确认即电子签署并存证。</div>
+      </div>
+      <div class="card" style="text-align:center;padding:12px">
+        <div class="code-in" style="margin:2px 0">
+          <div class="d on">5</div><div class="d on">1</div><div class="d on">9</div>
+          <div class="d cur">0</div><div class="d"></div><div class="d"></div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">短信验证码意愿确认 · 138****6602</div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn">确认并签署留货单</button></div>
+  </div></div>
+  <div class="caption">A3 · 留货单在线确认（锁价签署）</div>
+  </div>
+
+  <!-- 4. 发起提货指令 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>发起提货指令</h3></div>
+    <div class="body">
+      <div class="card">
+        <div class="field"><label>关联留货单</label><div class="input sel">LH-260602-031（已锁货 120 吨）</div></div>
+        <div class="field"><label>提货仓库</label><div class="input sel">宁波北仑 1 号库</div></div>
+        <div class="field"><label>品名 / 规格</label><div class="input sel">热轧卷板 Q235B 3.0*1500</div></div>
+        <div class="field"><label>授权提货数量（上限）</label><div class="input"><span>120</span><span class="ph">吨</span></div></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>授权车辆 / 驾驶员</h4>
+        <div class="field"><label>车牌号 <b style="color:var(--danger)">*</b></label><div class="input"><span>浙A·F2X87</span><span class="ph">📷</span></div></div>
+        <div class="field"><label>驾驶员姓名（大额必填）</label><div class="input"><span class="ph">李师傅</span></div></div>
+        <div class="field" style="margin-bottom:0"><label>有效时段</label><div class="input sel">今日 09:00 — 18:00</div></div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn">下一步 · 确认并签署</button></div>
+  </div></div>
+  <div class="caption">A4 · 发起提货指令</div>
+  </div>
+
+  <!-- 5. 确认与签署 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>提货指令暨收货确认</h3></div>
+    <div class="body">
+      <div class="card">
+        <h4><span class="dot"></span>提货指令暨收货确认</h4>
+        <div class="row"><span class="k">留货单</span><span class="v">LH-260602-031</span></div>
+        <div class="row"><span class="k">品名规格</span><span class="v">热轧卷板 Q235B</span></div>
+        <div class="row"><span class="k">授权数量</span><span class="v">≤ 120 吨</span></div>
+        <div class="row"><span class="k">车牌</span><span class="v">浙A·F2X87</span></div>
+        <div class="row"><span class="k">有效时段</span><span class="v">今日 09:00-18:00</span></div>
+      </div>
+      <div class="consent" style="background:var(--brand-l);border-radius:12px;padding:12px;color:var(--text)">
+        <span class="check">✓</span>
+        <div style="font-size:12px">本人一次性确认：① 持此提货码到场的驾驶员（含第三方司机）视为我司授权提货人；② <b>货物驶离仓库即视为交付完成、收货确认成立</b>；③ 最终数量金额以结算单为准，<b>送达后 3 个工作日内未提异议即视为认可</b>。</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <h4 style="justify-content:center"><span class="dot"></span>短信验证码意愿确认</h4>
+        <div class="code-in">
+          <div class="d on">8</div><div class="d on">8</div><div class="d on">2</div>
+          <div class="d cur">1</div><div class="d"></div><div class="d"></div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">验证码已发送至 138****6602 · <span style="color:var(--brand)">重新发送(46s)</span></div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn amber">确认并生成提货码</button></div>
+  </div></div>
+  <div class="caption">A5 · 确认与电子签署</div>
+  </div>
+
+  <!-- 6. 提货码 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>提货码</h3><span class="more">↗</span></div>
+    <div class="body">
+      <div class="card" style="text-align:center">
+        <span class="badge b-success" style="margin-bottom:6px">✓ 已签署 · 已存证</span>
+        <div class="qr-wrap">
+          <div class="qr">
+            <svg viewBox="0 0 21 21" shape-rendering="crispEdges">
+              <rect width="21" height="21" fill="#fff"/>
+              <g fill="#0c1322">
+                <rect x="0" y="0" width="7" height="7"/><rect x="2" y="2" width="3" height="3" fill="#fff"/>
+                <rect x="14" y="0" width="7" height="7"/><rect x="16" y="2" width="3" height="3" fill="#fff"/>
+                <rect x="0" y="14" width="7" height="7"/><rect x="2" y="16" width="3" height="3" fill="#fff"/>
+                <rect x="9" y="0" width="1" height="1"/><rect x="11" y="0" width="2" height="1"/>
+                <rect x="9" y="2" width="2" height="2"/><rect x="12" y="3" width="1" height="2"/>
+                <rect x="9" y="9" width="2" height="2"/><rect x="12" y="9" width="2" height="1"/><rect x="14" y="10" width="2" height="2"/>
+                <rect x="17" y="9" width="1" height="3"/><rect x="19" y="9" width="2" height="1"/>
+                <rect x="9" y="12" width="1" height="3"/><rect x="11" y="13" width="3" height="1"/>
+                <rect x="15" y="14" width="2" height="2"/><rect x="18" y="13" width="1" height="2"/><rect x="20" y="14" width="1" height="3"/>
+                <rect x="9" y="17" width="2" height="1"/><rect x="12" y="16" width="1" height="3"/><rect x="14" y="18" width="3" height="1"/><rect x="18" y="17" width="2" height="2"/>
+                <rect x="3" y="9" width="2" height="1"/><rect x="0" y="9" width="1" height="2"/><rect x="1" y="11" width="3" height="1"/><rect x="6" y="9" width="1" height="3"/>
+              </g>
+            </svg>
+          </div>
+          <div class="pcode">8821 4406</div>
+          <div class="pcode-lbl">向仓管出示二维码或报读提货码</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row"><span class="k">车牌（已绑定）</span><span class="badge b-info">浙A·F2X87</span></div>
+        <div class="row"><span class="k">授权数量</span><span class="v">≤ 120 吨</span></div>
+        <div class="row"><span class="k">有效至</span><span class="v">今日 18:00</span></div>
+        <div class="row"><span class="k">动态码</span><span class="v" style="color:var(--success)">● 安全刷新中 58s</span></div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn ghost">分享给驾驶员</button></div>
+  </div></div>
+  <div class="caption">A6 · 提货码（含二维码）</div>
+  </div>
+
+  <!-- 7. 提货进度 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>提货进度 · TH-260602-018</h3></div>
+    <div class="body">
+      <div class="card">
+        <div class="tl">
+          <div class="it done"><div class="t">已下指令并签署</div><div class="d">06-02 09:12 · 电子签名+时间戳已存证</div></div>
+          <div class="it done"><div class="t">仓库核验通过</div><div class="d">06-02 10:35 · 车牌比对一致 浙A·F2X87</div></div>
+          <div class="it cur"><div class="t">过磅出库中</div><div class="d">06-02 10:41 · 净重 119.84 吨</div></div>
+          <div class="it"><div class="t">驶离仓库 · 出库即确认</div><div class="d">交付完成、风险转移</div></div>
+          <div class="it"><div class="t">结算单送达</div><div class="d">异议期 3 个工作日</div></div>
+          <div class="it"><div class="t">数量金额确认</div><div class="d">无异议自动确认</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>现场证据</h4>
+        <div class="row"><span class="k">车牌抓拍</span><span class="badge b-success">✓ 已采集</span></div>
+        <div class="row"><span class="k">过磅单</span><span class="badge b-success">✓ 119.84t</span></div>
+        <div class="row"><span class="k">闸口视频</span><span class="badge b-success">✓ 已存证</span></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="caption">A7 · 提货进度与证据</div>
+  </div>
+
+  <!-- 8. 结算单核对 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>结算单核对</h3></div>
+    <div class="body">
+      <div class="card" style="border-left:4px solid var(--warning)">
+        <h4><span class="dot" style="background:var(--warning)"></span>异议期倒计时</h4>
+        <div style="text-align:center;padding:6px 0">
+          <span style="font-size:30px;font-weight:800;color:var(--warning)">2 天 06:12</span>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">逾期未提异议视为认可数量及金额</div>
+        </div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>结算单 JS-260601-204</h4>
+        <div class="row"><span class="k">品名/规格</span><span class="v">螺纹钢 HRB400E Φ20</span></div>
+        <div class="row"><span class="k">出库净重</span><span class="v">98.62 吨</span></div>
+        <div class="row"><span class="k">结算单价</span><span class="v">¥ 3,920 / 吨</span></div>
+        <div class="row"><span class="k">货款金额</span><span class="v" style="color:var(--accent)">¥ 386,590.40</span></div>
+        <div class="row"><span class="k">关联留货单</span><span class="v">LH-260530-188</span></div>
+        <div class="row"><span class="k">送达时间</span><span class="v">06-01 16:20 已读</span></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>过磅凭证</h4>
+        <div class="row"><span class="k">毛重 / 皮重 / 净重</span><span class="v">114.0 / 15.38 / 98.62 t</span></div>
+        <div class="row"><span class="k">磅单 / 车牌抓拍</span><span class="badge b-success">✓ 可查看</span></div>
+      </div>
+    </div>
+    <div class="btn-bar" style="display:flex;gap:10px">
+      <button class="btn ghost" style="flex:1">提出异议</button>
+      <button class="btn" style="flex:1.4">确认无误</button>
+    </div>
+  </div></div>
+  <div class="caption">A8 · 结算单核对</div>
+  </div>
+
+  <!-- 9. 提出异议 -->
+  <div>
+  <div class="phone"><div class="notch"></div><div class="screen">
+    <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
+    <div class="appbar"><span class="back">‹</span><h3>提出异议</h3></div>
+    <div class="body">
+      <div class="card">
+        <div class="field"><label>异议类型</label><div class="input sel">数量不符</div></div>
+        <div class="field"><label>我方核定数量</label><div class="input"><span>97.80</span><span class="ph">吨</span></div></div>
+        <div class="field"><label>异议说明</label>
+          <div class="input" style="height:84px;align-items:flex-start"><span class="ph">请描述异议事由，如复磅差异、规格不符等…</span></div>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>上传凭证（复磅单/照片）</label>
+          <div class="id-up">
+            <div class="id-card" style="height:80px"><div class="ic">＋</div>添加图片</div>
+            <div class="id-card done" style="height:80px"><div class="ic">✓</div>复磅单.jpg</div>
+          </div>
+        </div>
+      </div>
+      <div class="consent" style="background:var(--info-l);border-radius:12px;padding:12px;color:var(--text)">
+        <span class="check" style="background:var(--info)">i</span>
+        <div style="font-size:12px">提交后该结算单转入<b>人工对账</b>，异议期暂停计时；对账结果将通知你确认。</div>
+      </div>
+    </div>
+    <div class="btn-bar"><button class="btn amber">提交异议</button></div>
+  </div></div>
+  <div class="caption">A9 · 提出异议</div>
+  </div>
+
+</div>
+
+<!-- ============ 仓管核验端 ============ -->
+<div class="section-title">
+  <div class="num">B</div>
+  <h2>仓管核验端</h2><span>磅房 / PDA / Web</span>
+</div>
+
+<div class="gallery">
+  <div class="browser">
+    <div class="bar"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="url">warehouse.qiyeshiming.com / verify</div></div>
+    <div class="ws">
+      <div class="side">
+        <div class="logo"><span class="m">钢</span>钢贸提货核验</div>
+        <div class="nav">
+          <a class="on">▦ 提货核验台</a>
+          <a>⚖ 过磅出库</a>
+          <a>≡ 今日台账</a>
+          <a>◷ 待出库队列</a>
+          <a>⚙ 设置</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="h"><h3>提货核验台</h3><span class="badge b-info">磅房 1 号岗 · 王磅</span></div>
+        <div class="verify-grid">
+          <div class="scan-box">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:10px">扫描或输入提货码</div>
+            <div class="scan-in"><input value="8821 4406" /><button>核验</button></div>
+            <div class="match ok">✓ 提货码有效 · 在有效期内（18:00 前）</div>
+            <div class="match ok">✓ 车牌识别比对一致</div>
+            <div style="text-align:center;margin:14px 0"><span class="plate">浙A·F2X87</span></div>
+            <div class="match warn">⚠ 授权 ≤120 吨，请按实际过磅出库</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4">车牌不一致时自动拦截 → 推送经办人二次确认（短信/刷脸）并存证后方可放行</div>
+          </div>
+          <div class="scan-box">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:6px">企业 / 货物</div>
+            <div style="font-weight:700;margin-bottom:2px">浙江中钢物资有限公司</div>
+            <div style="font-size:13px;color:var(--muted);margin-bottom:14px">热轧卷板 Q235B 3.0*1500 · 经办人 张建国</div>
+            <div style="font-size:13px;color:var(--muted)">过磅净重（地磅同步）</div>
+            <div class="weigh">119.84 t</div>
+            <div class="row"><span class="k">毛重</span><span class="v">135.20 t</span></div>
+            <div class="row"><span class="k">皮重</span><span class="v">15.36 t</span></div>
+            <button class="btn" style="margin-top:14px">确认出库并存证</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 业务员后台 ============ -->
+<div class="section-title">
+  <div class="num">C</div>
+  <h2>业务员 / 平台后台</h2><span>开户 · 提货单 · 证据中心</span>
+</div>
+
+<div class="gallery">
+  <div class="browser">
+    <div class="bar"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="url">admin.qiyeshiming.com / dashboard</div></div>
+    <div class="ws">
+      <div class="side">
+        <div class="logo"><span class="m">钢</span>实名签收后台</div>
+        <div class="nav">
+          <a class="on">▤ 数据概览</a>
+          <a>🏢 客户与开户</a>
+          <a>👤 经办人管理</a>
+          <a>📄 提货单</a>
+          <a>🧾 结算与异议</a>
+          <a>🔒 证据中心</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="h"><h3>数据概览</h3><span class="badge b-success">本月达标 · 实名成本 ¥0.42/人</span></div>
+        <div class="stat-row">
+          <div class="stat"><div class="n b">186</div><div class="l">今日提货单</div></div>
+          <div class="stat"><div class="n g">142</div><div class="l">已出库确认</div></div>
+          <div class="stat"><div class="n w">31</div><div class="l">结算异议期中</div></div>
+          <div class="stat"><div class="n">100%</div><div class="l">证据链完整率</div></div>
+        </div>
+        <table>
+          <tr><th>提货单号</th><th>客户</th><th>经办人</th><th>车牌</th><th>实提</th><th>状态</th><th>证据</th></tr>
+          <tr><td>TH-260602-018</td><td>浙江中钢物资</td><td>张建国</td><td>浙A·F2X87</td><td>119.84t</td><td><span class="badge b-warn">待出库</span></td><td><span class="badge b-info">采集中</span></td></tr>
+          <tr><td>TH-260602-016</td><td>江苏沪宁钢铁</td><td>李伟</td><td>苏B·9K321</td><td>76.20t</td><td><span class="badge b-info">待确认结算</span></td><td><span class="badge b-success">已存证</span></td></tr>
+          <tr><td>TH-260602-009</td><td>宝鑫金属</td><td>陈芳</td><td>浙C·8H66D</td><td>45.30t</td><td><span class="badge b-success">已确认</span></td><td><span class="badge b-success">可出证</span></td></tr>
+          <tr><td>TH-260601-204</td><td>浙江中钢物资</td><td>张建国</td><td>浙A·F2X87</td><td>98.62t</td><td><span class="badge b-info">异议期中</span></td><td><span class="badge b-success">已存证</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="browser">
+    <div class="bar"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="url">admin.qiyeshiming.com / holdnote / overdue</div></div>
+    <div class="ws">
+      <div class="side">
+        <div class="logo"><span class="m">钢</span>实名签收后台</div>
+        <div class="nav">
+          <a>▤ 数据概览</a>
+          <a>🏢 客户与开户</a>
+          <a class="on">📦 留货单·逾期处理</a>
+          <a>📄 提货单</a>
+          <a>🧾 结算与异议</a>
+          <a>🔒 证据中心</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="h"><h3>留货单逾期处理 · LH-260525-066</h3><span class="badge b-warn">已逾期 1 天</span></div>
+        <div class="stat-row">
+          <div class="scan-box" style="flex:1">
+            <div style="font-weight:700;margin-bottom:2px">江苏沪宁钢铁有限公司</div>
+            <div style="font-size:13px;color:var(--muted);margin-bottom:12px">螺纹钢 HRB400E Φ20 · 经办人 李伟</div>
+            <div class="row"><span class="k">锁定数量 / 已提</span><span class="v">300t / 180t（余 120t）</span></div>
+            <div class="row"><span class="k">锁定单价</span><span class="v" style="color:var(--accent)">¥ 3,860 / 吨</span></div>
+            <div class="row"><span class="k">当前市场价</span><span class="v" style="color:var(--danger)">¥ 4,010 / 吨 ↑</span></div>
+            <div class="row"><span class="k">定金</span><span class="v">¥ 115,800</span></div>
+            <div class="row"><span class="k">提货有效期</span><span class="v" style="color:var(--danger)">已于 05-25 18:00 届满</span></div>
+          </div>
+          <div class="scan-box" style="flex:1">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:12px">选择处理方式（依协议逾期条款）</div>
+            <div class="match warn" style="cursor:pointer">A · 顺延并按市场价调价至 ¥4,010/吨 → 待买方确认</div>
+            <div class="match warn" style="cursor:pointer;margin-top:8px">B · 抵扣定金 ¥115,800 作违约金并解除剩余</div>
+            <div class="match ok" style="cursor:pointer;margin-top:8px">C · 解除留货 · 释放库存 120t</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--muted)">
+              <span class="check" style="background:var(--brand)">✓</span> 通知经办人（系统推送 + 短信，记录送达证据）
+            </div>
+            <button class="btn" style="margin-top:12px">执行处理并通知 · 存证</button>
+          </div>
+        </div>
+        <table>
+          <tr><th>时间</th><th>动作</th><th>送达</th><th>结果</th></tr>
+          <tr><td>05-24 18:00</td><td>到期前 T-1 提醒经办人</td><td><span class="badge b-success">已送达</span></td><td>—</td></tr>
+          <tr><td>05-25 18:00</td><td>有效期届满 · 余 120t 未提</td><td>—</td><td><span class="badge b-warn">逾期待处理</span></td></tr>
+          <tr><td>05-26 09:30</td><td>卖方发起处理（待确认）</td><td><span class="badge b-info">待操作</span></td><td><span class="badge b-muted">进行中</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <b>设计说明：</b> 配色采用钢贸工业蓝（品牌色 #1456d6），状态用语义色区分（蓝=进行/待确认，绿=完成/已存证，橙=待出库/提醒）。
+  移动端核心操作 ≤ 2 步；提货码绑定车牌+数量+时段并动态刷新防转借；仓管端实时车牌比对与地磅同步；后台一键聚合证据链并出证。
+  留货单逾期处理支持调价/定金抵扣/解除三分支，所有通知均记录送达证据并存证，形成锁价闭环。
+  车牌属授权范围：现场车牌与提货码不一致即拦截，须经办人二次确认（短信/刷脸）更新绑定并存证后放行，防止越权放货与冒领。
+  开户硬门槛：仅"业务员代录+采购员个人实名"不足以约束企业，须一次企业级确权（法人意愿认证/电子章/盖章授权书）方可正式提货，防止企业事后否认采购员授权。
+</div>
+
+<div class="foot-note">钢贸提货单实名签收系统 · 高保真原型（静态演示，数据为示例）</div>
+
+</body>
+</html>
